@@ -1,13 +1,36 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ufjf.dcc025.hospital.model;
 
 /**
  *
  * @author mjjun
  */
-public class Medico {
+
+///herança da classe usuario, ja que o medico também é um usuario do sistema
+public class Medico extends Usuario{
+    private String especialidade;
+    private boolean ativo;
+
+    ///construtor do medico
+    public Medico(String nome, String cpf, String especialidade){
+        super(nome, cpf);
+        this.especialidade = especialidade;
+        this.ativo = true;
+    }
+
+    public String getEspecialidade(){
+        return especialidade;
+    }
+
+    public boolean isAtivo(){
+        return ativo;
+    }
     
+    public void desativar(){
+        this.ativo = false;
+    }
+
+    public void ativar(){
+        this.ativo=true;
+    }
 }
+
