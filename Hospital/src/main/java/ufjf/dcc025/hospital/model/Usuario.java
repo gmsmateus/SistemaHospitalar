@@ -1,13 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ufjf.dcc025.hospital.model;
 
-/**
- *
- * @author mjjun
- */
-public class Usuario {
+
+public abstract class Usuario {
+    
+   protected String nome;
+   protected String cpf;
+   protected String login;
+   protected String senha;
+    
+    
+    public Usuario(String nome , String cpf, String login, String senha){
+        
+        this.nome = nome;
+        this.cpf = cpf;
+        this . login = login;
+        this.senha = senha;
+    } 
+    
+    public abstract String getTipo();
     
 }
