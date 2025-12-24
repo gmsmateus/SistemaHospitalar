@@ -32,5 +32,15 @@ public class Medico extends Usuario{
     public void ativar(){
         this.ativo=true;
     }
-}
 
+    //metodo para facilitar a visualização dos dados do medico
+    @Override
+    public String toString(){
+    return "Medico{" +
+            "nome='" + nome + '\'' +
+            ", cpf='" + cpf + '\'' +
+            ", especialidade='" + especialidade + '\'' +
+            ", ativo=" + ativo +
+            '}';
+    }
+}
