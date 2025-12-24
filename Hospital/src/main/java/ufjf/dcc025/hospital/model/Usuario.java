@@ -1,6 +1,6 @@
 package ufjf.dcc025.hospital.model;
 
-import ufjf.dcc025.hospital.exeption.DadosInvalidosException;
+import ufjf.dcc025.hospital.exception.DadosInvalidosException;
 
 
 public abstract class Usuario {
@@ -32,23 +32,35 @@ public abstract class Usuario {
     
     public String getNome(){ return nome; }
     
-    public void setNome(String nome){
+    public void setNome(String nome)throws DadosInvalidosException{
+        if(nome == null || nome.trim().isEmpty())
+            throw new DadosInvalidosException("Nome inválido");
+        
         this.nome = nome;
     }
     
     public String getCpf(){ return cpf; }
     
-    public void setCpf(String cpf){
+    public void setCpf(String cpf) throws DadosInvalidosException{
+        if (cpf == null || cpf.length() != 11) 
+            throw new DadosInvalidosException("CPF deve conter 11 dígitos numéricos");
+         
         this.cpf = cpf;
     }
  
     public String getLogin(){ return login; }
     
-    public void setLogin(String login){
+    public void setLogin(String login)throws DadosInvalidosException{
+        if(login == null || login.trim().isEmpty())
+            throw new DadosInvalidosException("Login inválido");
+        
         this.login = login;
     }
         
-    public void setSenha(String senha){
+    public void setSenha(String senha)throws DadosInvalidosException{
+        if (senha == null || senha.trim().isEmpty())
+            throw new DadosInvalidosException("Senha inválida");
+        
         this.senha = senha;
     }
     

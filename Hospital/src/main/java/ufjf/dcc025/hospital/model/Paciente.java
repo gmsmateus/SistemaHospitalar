@@ -2,7 +2,7 @@ package ufjf.dcc025.hospital.model;
 
 import java.util.List;
 import java.util.ArrayList;
-import ufjf.dcc025.hospital.exeption.DadosInvalidosException;
+import ufjf.dcc025.hospital.exception.DadosInvalidosException;
 
 
 
@@ -58,7 +58,8 @@ public class Paciente extends Usuario{
         return "PACIENTE";
     }
     
-    public String tosString(){
+    @Override
+    public String toString(){
         return getTipo() +  ": " + nome + " CPF: "  + cpf;
     }
 }
