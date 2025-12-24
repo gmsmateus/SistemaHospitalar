@@ -8,6 +8,6 @@ package ufjf.dcc025.hospital.view;
  *
  * @author mjjun
  */
-public class AgendaConsulta {
+public class SecretariaInterface {
     
 }
