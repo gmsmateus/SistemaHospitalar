@@ -1,4 +1,4 @@
-package ufjf.dcc025.hospital.model;
+package ufjf.dcc025.hospital.usuarios;
 
 import ufjf.dcc025.hospital.exception.DadosInvalidosException;
 
