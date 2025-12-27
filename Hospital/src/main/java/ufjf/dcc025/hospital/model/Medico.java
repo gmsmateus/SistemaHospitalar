@@ -48,8 +48,22 @@ public class Medico extends Usuario{
         }
     }
 
+    /**
+    * Retorna a lista de consultas do medico.
+    *
+    * @return lista de consultas
+    */
     public List<Consulta> getAgenda(){
-        return agenda;
+        return new ArrayList<>(agenda);
+    }
+
+    /**
+     * remove uma consulta da agenda do medico
+     * 
+     * @param consulta a consulta a ser removida
+    */
+    public void removerConsulta(Consulta consulta){
+        agenda.remove(consulta);
     }
 
     public String getEspecialidade(){
