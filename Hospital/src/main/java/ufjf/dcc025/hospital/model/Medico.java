@@ -25,9 +25,11 @@ public class Medico extends Usuario{
     * @param cpf cpf do medico
     * @param especialidade especialidade medica
     */
-
     public Medico(String nome, String cpf, String especialidade){
         super(nome, cpf);
+        if(especialidade == null || especialidade.isBlank()){
+            throw new IllegalArgumentException("A especialidade do medico não pode ser vazia");
+        }
         this.especialidade = especialidade;
         this.ativo = true;
         this.agenda = new ArrayList<>();
@@ -63,6 +65,9 @@ public class Medico extends Usuario{
      * @param consulta a consulta a ser removida
     */
     public void removerConsulta(Consulta consulta){
+        if(!ativo){
+            throw new IllegalStateException("Medico está inativo, então não pode remover consultas.");
+        }
         agenda.remove(consulta);
     }
 
