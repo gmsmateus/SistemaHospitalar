@@ -17,6 +17,8 @@ public class Medico extends Usuario{
     private boolean ativo;
     //cada medico vai ter uma agenda de consultas que começa vazia
     private List<Consulta> agenda;
+    //lista de historico clinico dos pacientes atendidos
+    private List<HistoricoClinico> historicos;
 
     /**
     * Cria um medico com nome, CPF e especialidade.
@@ -33,6 +35,7 @@ public class Medico extends Usuario{
         this.especialidade = especialidade;
         this.ativo = true;
         this.agenda = new ArrayList<>();
+        this.historicos = new ArrayList<>();
     }
 
     /**
@@ -59,6 +62,14 @@ public class Medico extends Usuario{
         return new ArrayList<>(agenda);
     }
 
+    /**
+     * retorna todos os historicos clinicos dos pacientes
+     * 
+     * @return lista de historicos
+     */
+    public List<HistoricoClinico> getHistoricos(){
+        return new ArrayList<>(historicos);
+    }
     /**
      * retorna a quantidade de consultas na agenda do medico
      * 
