@@ -1,4 +1,8 @@
 package ufjf.dcc025.hospital.model;
+import ufjf.dcc025.hospital.model.Consulta;
+import java.util.List;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -9,12 +13,15 @@ package ufjf.dcc025.hospital.model;
 public class Medico extends Usuario{
     private String especialidade;
     private boolean ativo;
+    //cada medico vai ter uma agenda de consultas que começa vazia
+    private List<Consulta> agenda;
 
     ///construtor do medico
     public Medico(String nome, String cpf, String especialidade){
         super(nome, cpf);
         this.especialidade = especialidade;
         this.ativo = true;
+        this.agenda = new ArrayList<>();
     }
 
     public String getEspecialidade(){
