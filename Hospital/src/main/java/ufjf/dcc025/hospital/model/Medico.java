@@ -25,7 +25,12 @@ public class Medico extends Usuario{
 
     //adiciona uma consulta na agenda do medico
     public void adicionarConsulta(Consulta consulta){
-        agenda.add(consulta);
+        if(!ativo){
+            throw new IllegalStateException("Médico está inativo, então não pode adicionar consultas.");
+        }
+        else{
+            this.agenda.add(consulta);
+        }
     }
 
     public List<Consulta> getAgenda(){
