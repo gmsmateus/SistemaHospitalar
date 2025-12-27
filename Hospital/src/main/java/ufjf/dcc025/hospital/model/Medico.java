@@ -23,8 +23,13 @@ public class Medico extends Usuario{
         this.agenda = new ArrayList<>();
     }
 
+    //adiciona uma consulta na agenda do medico
     public void adicionarConsulta(Consulta consulta){
         agenda.add(consulta);
+    }
+
+    public List<Consulta> getAgenda(){
+        return agenda;
     }
 
     public String getEspecialidade(){
