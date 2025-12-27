@@ -144,4 +144,26 @@ public class Medico extends Usuario{
             ", ativo=" + ativo +
             '}';
     }
-}
+
+    /**
+     * Emite um atestado medico para um paciente 
+     * 
+     *  @param paciente nome do paciente
+     *  @param descricao descricao do atestado
+     *  @return string que representa o atestado 
+     */    
+    public String emitirAtestado(String paciente, String descricao){
+        return "Atestado Médico\nPaciente:" + paciente + "\nDescrição: " + descricao;
+    }
+
+     /**
+      * Prescreve uma receita medica para um paciente 
+      * 
+      * @param paciente nome do paciente
+      * @param medicamentos lista de medicamentos 
+      * @return String representando a receita
+      */
+     public String preescreverReceitaString(String paciente, List<String> medicamentos){
+        return "Receita Médica\nPaciente: " + paciente + "\nMedicamentos: " + String.join(", ", medicamentos);
+     }
+}   
