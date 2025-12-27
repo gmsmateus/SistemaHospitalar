@@ -60,6 +60,27 @@ public class Medico extends Usuario{
     }
 
     /**
+     * retorna a quantidade de consultas na agenda do medico
+     * 
+     * @return numero de consultas
+     */
+    public int quantidadeConsultas(){
+        return agenda.size();
+    }
+
+    /**
+     * verifica o medico possui uma consulta especifica
+     * 
+     * @param consulta a consulta a ser verificada
+     * @return verdade se a consulta exisir, falso caso contrario
+     */
+
+    public boolean possuiConsulta(Consulta consulta){
+        return agenda.contains(consulta);
+    }
+
+
+    /**
      * remove uma consulta da agenda do medico
      * 
      * @param consulta a consulta a ser removida
