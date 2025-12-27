@@ -1,5 +1,4 @@
 package ufjf.dcc025.hospital.model;
-import ufjf.dcc025.hospital.model.Consulta;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -22,6 +21,10 @@ public class Medico extends Usuario{
         this.especialidade = especialidade;
         this.ativo = true;
         this.agenda = new ArrayList<>();
+    }
+
+    public void adicionarConsulta(Consulta consulta){
+        agenda.add(consulta);
     }
 
     public String getEspecialidade(){
