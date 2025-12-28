@@ -8,6 +8,19 @@ package ufjf.dcc025.hospital.model;
  *
  * @author mjjun
  */
+//fiz aqui so pra ter o que vou usar no medico na parte de monitoramento
 public class Consulta {
-    
+    private boolean compareceu;
+
+    public Consulta(){
+        this.compareceu = true; //vou considerar por padrão que o paciente foi
+    }
+
+    public boolean isCompareceu(){
+        return compareceu;
+    }
+
+    public void registrarFalta(){
+        this.compareceu = false;
+    }
 }

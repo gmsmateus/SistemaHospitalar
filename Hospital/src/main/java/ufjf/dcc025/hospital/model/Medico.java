@@ -177,5 +177,31 @@ public class Medico extends Usuario{
      public List<HorarioAtendimento> getHorariosAtendimento(){
         return new ArrayList<>(horariosAtendimento);
      }
+
+     /**
+      * registra a falta de um paciente em uma consulta
+      * @param consulta consulta em que o paciente faltou
+      */
+     public void registrarFaltaPaciente(Consulta consulta){
+        if(!agenda.contains(consulta)){
+            throw new IllegalArgumentException("Consulta não pertence à agenda do médico!");
+        }
+        consulta.registrarFalta();
+     }
+
+     /**
+      * retorna as consultas em que o paciente faltou
+      * @return lista de consultas com faltas
+      */
+     public List<Consulta> getConsultasComFaltas(){
+        List<Consulta> faltas = new ArrayList<>();
+        for(int i=0; i < agenda.size(); i++){
+            Consulta consulta = agenda.get(i);
+            if(!consulta.isCompareceu()){
+                faltas.add(consulta);
+            }
+        }
+        return faltas;
+     }
   
 }   
