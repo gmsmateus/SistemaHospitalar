@@ -8,8 +8,8 @@ import ufjf.dcc025.hospital.servicos_hospital.Exame;
 
 public class Historico {
     
-    private List<Consulta> consultas;
-    private List<Exame> exames;
+    private final List<Consulta> consultas;
+    private final List<Exame> exames;
     
     public Historico(){
         this.consultas = new ArrayList<>();
@@ -40,6 +40,4 @@ public class Historico {
     public List<Exame> getExames(){
         return new ArrayList<>(this.exames); 
     }
-    
-    
 }
