@@ -12,6 +12,7 @@ public class Consulta {
     private Medico medicoResponsavel;
     private Paciente paciente;
     
+    private boolean compareceu;
     //private boolean marcada;
     
     public Consulta(String dia , String horario, String duracao, Medico medico, Paciente paciente){
@@ -22,6 +23,7 @@ public class Consulta {
         this.paciente = paciente;
         medicoResponsavel = medico;
         //marcada = true;
+        this.compareceu = true; //vou considerar por padrão que o paciente foi
     }
     
     public String getDia(){ return dia; }
@@ -52,4 +54,12 @@ public class Consulta {
     }
     */
     
+
+    public boolean isCompareceu(){
+        return compareceu;
+    }
+
+    public void registrarFalta(){
+        this.compareceu = false;
+    }
 }
