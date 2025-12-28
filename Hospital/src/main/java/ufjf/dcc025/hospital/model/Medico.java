@@ -2,7 +2,6 @@ package ufjf.dcc025.hospital.model;
 import java.util.List;
 import java.util.ArrayList;
 /**
- *
  * @author mjjun
  */
 
@@ -15,14 +14,18 @@ import java.util.ArrayList;
 public class Medico extends Usuario{
     private String especialidade;
     private boolean ativo;
+
     //cada medico vai ter uma agenda de consultas que começa vazia
     private List<Consulta> agenda;
+
+    //horarios de atendimento definidos pelo medico
+    private List<HorarioAtendimento> horariosAtendimento;
+
     //lista de historico clinico dos pacientes atendidos
     private List<HistoricoClinico> historicos;
 
     /**
     * Cria um medico com nome, CPF e especialidade.
-    *
     * @param nome nome do medico
     * @param cpf cpf do medico
     * @param especialidade especialidade medica
@@ -36,11 +39,11 @@ public class Medico extends Usuario{
         this.ativo = true;
         this.agenda = new ArrayList<>();
         this.historicos = new ArrayList<>();
+        this.horariosAtendimento = new ArrayList<>();
     }
 
     /**
     * Adiciona uma consulta a agenda do medico.
-    *
     * @param consulta consulta a ser adicionada
     */  
     public void adicionarConsulta(Consulta consulta){
@@ -55,7 +58,6 @@ public class Medico extends Usuario{
 
     /**
     * Retorna a lista de consultas do medico.
-    *
     * @return lista de consultas
     */
     public List<Consulta> getAgenda(){
@@ -64,7 +66,6 @@ public class Medico extends Usuario{
 
     /**
      * retorna todos os historicos clinicos dos pacientes
-     * 
      * @return lista de historicos
      */
     public List<HistoricoClinico> getHistoricos(){
@@ -72,7 +73,6 @@ public class Medico extends Usuario{
     }
     /**
      * retorna a quantidade de consultas na agenda do medico
-     * 
      * @return numero de consultas
      */
     public int quantidadeConsultas(){
@@ -81,7 +81,6 @@ public class Medico extends Usuario{
 
     /**
      * verifica o medico possui uma consulta especifica
-     * 
      * @param consulta a consulta a ser verificada
      * @return verdade se a consulta exisir, falso caso contrario
      */
@@ -93,7 +92,6 @@ public class Medico extends Usuario{
 
     /**
      * remove uma consulta da agenda do medico
-     * 
      * @param consulta a consulta a ser removida
     */
     public void removerConsulta(Consulta consulta){
@@ -132,7 +130,6 @@ public class Medico extends Usuario{
 
     /**
     * Retorna uma representacao em texto do medico.
-    *
     * @return string com os dados do medico
     */
     @Override
@@ -147,23 +144,38 @@ public class Medico extends Usuario{
 
     /**
      * Emite um atestado medico para um paciente 
-     * 
      *  @param paciente nome do paciente
      *  @param descricao descricao do atestado
      *  @return string que representa o atestado 
      */    
     public String emitirAtestado(String paciente, String descricao){
-        return "Atestado Médico\nPaciente:" + paciente + "\nDescrição: " + descricao;
+        return "Atestado Médico\nPaciente:" + paciente + "\nDescrição: " + descricao + "\nMedico: " + nome;
     }
 
      /**
       * Prescreve uma receita medica para um paciente 
-      * 
       * @param paciente nome do paciente
       * @param medicamentos lista de medicamentos 
       * @return String representando a receita
       */
      public String preescreverReceitaString(String paciente, List<String> medicamentos){
-        return "Receita Médica\nPaciente: " + paciente + "\nMedicamentos: " + String.join(", ", medicamentos);
+        return "Receita Médica\nPaciente: " + paciente + "\nMedicamentos: " + String.join(", ", medicamentos) + "\nMedico: " + nome;
      }
+
+     /**
+      * Define um horario de atendimento do medico
+      * @param horario horario de atendimento
+      */
+     public void adicionarHorarioAtendimento(HorarioAtendimento horario){
+        horariosAtendimento.add(horario);
+     }
+
+     /**
+      * retorna os horarios de atendimento do medico
+      * @return lita de horarios
+      */
+     public List<HorarioAtendimento> getHorariosAtendimento(){
+        return new ArrayList<>(horariosAtendimento);
+     }
+  
 }   
