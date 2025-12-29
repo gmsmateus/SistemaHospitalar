@@ -1,8 +1,11 @@
 package ufjf.dcc025.hospital;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-//import ufjf.dcc025.hospital.usuarios.Usuario;
+import ufjf.dcc025.hospital.usuarios.Usuario;
 import ufjf.dcc025.hospital.usuarios.médico.Medico;
 import ufjf.dcc025.hospital.usuarios.paciente.Paciente;
 import ufjf.dcc025.hospital.exception.UsuarioNaoEncontradoException;
@@ -13,59 +16,72 @@ import ufjf.dcc025.hospital.servicos_hospital.Consulta;
  *é responsavel por gerenciar o cadastro e acesso aos usuarios
  * @author mjjun
  */
+
 public class Hospital {
-    private List<Medico> medicos;
-    private List<Paciente> pacientes;
+    //private List<Medico> medicos;
+    //private List<Paciente> pacientes;
+    private List<Usuario> usuarios;
     private List<Consulta> consultas;
 
     public Hospital(){
-        this.medicos = new ArrayList<>();
-        this.pacientes = new ArrayList<>();
+        //this.medicos = new ArrayList<>();
+        //this.pacientes = new ArrayList<>();
+        this.usuarios = new ArrayList<>();
         this.consultas = new ArrayList<>();
     }
 
     //Parte do cadastro
     public void cadastrarMedico(Medico medico){
-        boolean existe = medicos.stream()
-                .anyMatch(m->m.getCpf().equals(medico.getCpf()));
+        boolean existe = usuarios.stream()
+                .anyMatch(u->u.getCpf().equals(medico.getCpf()));
         if(existe){
             throw new DadosInvalidosException("Medico já cadastrado com esse CPF");
         }
-        medicos.add(medico);
+        usuarios.add(medico);
     }
 
     public void cadastrarPaciente(Paciente paciente){
-        boolean existe = pacientes.stream()
-                .anyMatch(p->p.getCpf().equals(paciente.getCpf()));
+        boolean existe = usuarios.stream()
+                .anyMatch(u->u.getCpf().equals(paciente.getCpf()));
         if(existe){
             throw new DadosInvalidosException("Paciente já cadastrado com esse CPF");
         }
-        pacientes.add(paciente);
+        usuarios.add(paciente);
     }
 
     //parte da busca
     public Medico buscarMedicoPorCpf(String cpf){
-        return medicos.stream()
-                .filter(m -> m.getCpf().equals(cpf))
-                .findFirst()
-                .orElseThrow(()->
-                    new UsuarioNaoEncontradoException("Medico não encontrado"));
-    }
+        return usuarios.stream()
+            .filter(u -> u instanceof Medico)
+            .map(u -> (Medico) u)
+            .filter(m -> m.getCpf().equals(cpf))
+            .findFirst()
+            .orElseThrow(() ->
+                new UsuarioNaoEncontradoException("Médico não encontrado"));
+}
     public Paciente buscarPacientePorCpf(String cpf){
-        return pacientes.stream()
-                .filter(p -> p.getCpf().equals(cpf))
-                .findFirst()
-                .orElseThrow(()->
-                    new UsuarioNaoEncontradoException("Paciente não encontrado"));
-    }
+        return usuarios.stream()
+            .filter(u -> u instanceof Paciente)
+            .map(u -> (Paciente) u)
+            .filter(p -> p.getCpf().equals(cpf))
+            .findFirst()
+            .orElseThrow(() ->
+                new UsuarioNaoEncontradoException("Paciente não encontrado"));
+}
 
     //parte da listagem
     public List<Medico> listarMedicos(){
-        return new ArrayList<>(medicos);
+        return usuarios.stream()
+            .filter(u -> u instanceof Medico)
+            .map(u -> (Medico) u)
+            .toList();
     }
 
     public List<Paciente> listarPacientes(){
-        return new ArrayList<>(pacientes);
+        return usuarios.stream()
+            .filter(u -> u instanceof Paciente)
+            .map(u -> (Paciente) u)
+            .toList();
     }
 
     //registra uma nova consulta
@@ -88,7 +104,31 @@ public class Hospital {
                 .filter(c -> c.getPaciente().equals(paciente))
                 .toList();
     }
-    
+
+    public Usuario login(String login, String senha){
+        Usuario usuario = usuarios.stream()
+            .filter(u -> u.getLogin().equals(login))
+            .findFirst()
+            .orElseThrow(() ->
+                new UsuarioNaoEncontradoException("Usuario não encontrado"));
+        if(!usuario.validarSenha(senha)){
+            throw new DadosInvalidosException("Senha incorreta!");
+        }
+
+        return usuario;
+    }
+
+    public void marcarConsulta(String cpfMedico, String cpfPaciente, LocalDate data, LocalTime hora){
+        Medico medico = buscarMedicoPorCpf(cpfMedico);
+        Paciente paciente = buscarPacientePorCpf(cpfPaciente);
+
+        if(medico.getAgenda() == null){
+            throw new DadosInvalidosException("Médico não possui agenda definida");
+        }
+        LocalDateTime horario = LocalDateTime.of(data, hora);
+        Consulta consulta = new Consulta(medico, paciente, horario);
+        consultas.add(consulta);
+    }
 
 
 }
