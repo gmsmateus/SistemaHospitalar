@@ -7,6 +7,7 @@ import ufjf.dcc025.hospital.usuarios.médico.Medico;
 import ufjf.dcc025.hospital.usuarios.paciente.Paciente;
 import ufjf.dcc025.hospital.exception.UsuarioNaoEncontradoException;
 import ufjf.dcc025.hospital.exception.DadosInvalidosException;
+import ufjf.dcc025.hospital.servicos_hospital.Consulta;
 /**
  *classe central do sistema do hospital
  *é responsavel por gerenciar o cadastro e acesso aos usuarios
@@ -15,10 +16,12 @@ import ufjf.dcc025.hospital.exception.DadosInvalidosException;
 public class Hospital {
     private List<Medico> medicos;
     private List<Paciente> pacientes;
+    private List<Consulta> consultas;
 
     public Hospital(){
         this.medicos = new ArrayList<>();
         this.pacientes = new ArrayList<>();
+        this.consultas = new ArrayList<>();
     }
 
     //Parte do cadastro
@@ -65,6 +68,27 @@ public class Hospital {
         return new ArrayList<>(pacientes);
     }
 
+    //registra uma nova consulta
+    public void registrarConsulta(Consulta consulta){
+        consultas.add(consulta);
+    }
+    //lista com todas consultas
+    public List<Consulta> listarConsultas(){
+        return new ArrayList<>(consultas);
+    }
+    //lista de consultas de um medico
+    public List<Consulta> listarConsultasPorMedico(Medico medico){
+        return consultas.stream()
+                .filter(c -> c.getMedico().equals(medico))
+                .toList();
+    }
+    //lista de consultas de um paciente
+    public List<Consulta> listarConsultasPorPaciente(Paciente paciente){
+        return consultas.stream()
+                .filter(c -> c.getPaciente().equals(paciente))
+                .toList();
+    }
+    
 
 
 }
