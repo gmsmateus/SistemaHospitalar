@@ -155,7 +155,7 @@ public class Hospital {
                 .anyMatch(c->
                     c.getMedico().equals(medico) && 
                     c.getDataHora().toLocalDate().equals(data) &&
-                    c.getDataHora().toLocalDate().equals(hora)
+                    c.getDataHora().toLocalTime().equals(hora)
                 );
         if(conflito){
             throw new DadosInvalidosException("Médico ja possui consulta marcada nesse horario");
@@ -168,6 +168,16 @@ public class Hospital {
         if(!removida){
             throw new UsuarioNaoEncontradoException("Consulta não encontrada para cancelamento");
         }
+    }
+
+    public void reagendarConsulta(Consulta consulta, LocalDate novaData, LocalTime novaHora){
+        if(!consultas.contains(consulta)){
+            throw new UsuarioNaoEncontradoException("Consulta não encontrada");
+        }
+
+        //ja reaproveito para validar o horario
+        validarHorarioConsulta(consulta.getMedico(), novaData, novaHora);
+        consulta.reagendar(novaData, novaHora);
     }
 
 }

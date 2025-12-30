@@ -1,5 +1,7 @@
 package ufjf.dcc025.hospital.servicos_hospital;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.LocalDateTime;
 import ufjf.dcc025.hospital.usuarios.médico.Medico;
 import ufjf.dcc025.hospital.usuarios.paciente.Paciente;
@@ -38,6 +40,10 @@ public class Consulta {
 
     public void marcarConcluida(){
         this.realizada = true;
+    }
+
+    public void reagendar(LocalDate novaData, LocalTime novaHora){
+        this.dataHora = LocalDateTime.of(novaData, novaHora);
     }
 
 }

@@ -1,7 +1,7 @@
 package ufjf.dcc025.hospital.usuarios.paciente;
 
-import java.util.List;
-import java.util.ArrayList;
+//import java.util.List;
+//import java.util.ArrayList;
 import ufjf.dcc025.hospital.exception.DadosInvalidosException;
 import ufjf.dcc025.hospital.usuarios.Usuario;
 
