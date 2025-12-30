@@ -33,9 +33,9 @@ public class Receita {
     public String toString() {
     return """
            ==========================================
-                        RECEITA M\u00c9DICA               
+                        RECEITA MÉDICA               
            ==========================================
-           M\u00c9DICO: """ + medico.getNome() + "\n" +
+           MÉDICO: """ + medico.getNome() + "\n" +
            "PACIENTE: " + paciente.getNome() + "\n" +
            "------------------------------------------\n" +
            "MEDICAMENTO: " + medicamento + "\n" +
