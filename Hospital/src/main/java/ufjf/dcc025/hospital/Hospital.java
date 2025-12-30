@@ -162,4 +162,12 @@ public class Hospital {
         }
     }
 
+    public void cancelarConsulta(Consulta consulta){
+        boolean removida = consultas.remove(consulta);
+
+        if(!removida){
+            throw new UsuarioNaoEncontradoException("Consulta não encontrada para cancelamento");
+        }
+    }
+
 }
