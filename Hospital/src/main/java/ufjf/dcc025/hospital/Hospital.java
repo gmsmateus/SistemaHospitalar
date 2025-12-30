@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import ufjf.dcc025.hospital.usuarios.Usuario;
-import ufjf.dcc025.hospital.usuarios.médico.Agenda;
-import ufjf.dcc025.hospital.usuarios.médico.Medico;
+import ufjf.dcc025.hospital.usuarios.medico.Agenda;
+import ufjf.dcc025.hospital.usuarios.medico.Medico;
 import ufjf.dcc025.hospital.usuarios.paciente.Paciente;
 import ufjf.dcc025.hospital.exception.UsuarioNaoEncontradoException;
 import ufjf.dcc025.hospital.exception.DadosInvalidosException;
@@ -136,7 +136,7 @@ public class Hospital {
     }
 
     private void validarHorarioConsulta(Medico medico, LocalDate data, LocalTime hora){
-        Agenda agenda = medico.getAgenda();
+        Agenda agenda = medico.getAgenda1();
         //primeiro vou verificar o dia da semana
         if(!agenda.getDia().equals(data.getDayOfWeek())){
             throw new DadosInvalidosException("Médico não atende neste dia");

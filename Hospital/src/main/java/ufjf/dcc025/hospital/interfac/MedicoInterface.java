@@ -8,6 +8,7 @@ package ufjf.dcc025.hospital.interfac;
  *
  * @author mjjun
  */
+//fiz aqui so pra ter o que vou usar no medico na parte de monitoramento
 public class MedicoInterface {
     
 }

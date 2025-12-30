@@ -3,7 +3,8 @@ package ufjf.dcc025.hospital.servicos_hospital;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.LocalDateTime;
-import ufjf.dcc025.hospital.usuarios.médico.Medico;
+
+import ufjf.dcc025.hospital.usuarios.medico.Medico;
 import ufjf.dcc025.hospital.usuarios.paciente.Paciente;
 /**
  *representa uma cosulta medica no hospital
@@ -14,6 +15,8 @@ public class Consulta {
     private Paciente paciente;
     private LocalDateTime dataHora;
     private boolean realizada;
+
+    private boolean compareceu;
     //private boolean cancelada;
 
     public Consulta(Medico medico, Paciente paciente, LocalDateTime dataHora){
@@ -47,4 +50,11 @@ public class Consulta {
         this.dataHora = LocalDateTime.of(novaData, novaHora);
     }
 
+    public boolean isCompareceu(){
+        return compareceu;
+    }
+
+    public void registrarFalta(){
+        this.compareceu = false;
+    }
 }

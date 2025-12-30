@@ -8,6 +8,7 @@ public abstract class Usuario {
    protected String nome;
    protected String cpf;
    protected String login;
+   protected String email;
    protected String senha;
     
     
@@ -34,7 +35,7 @@ public abstract class Usuario {
     
     public void setNome(String nome)throws DadosInvalidosException{
         if(nome == null || nome.trim().isEmpty())
-            throw new DadosInvalidosException("Nome inválido");
+            throw new DadosInvalidosException("Nome não informado");
         
         this.nome = nome;
     }
