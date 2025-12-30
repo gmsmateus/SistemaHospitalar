@@ -1,59 +1,54 @@
 package ufjf.dcc025.hospital.servicos_hospital;
 
-import ufjf.dcc025.hospital.usuarios.médico.Medico;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+
+import ufjf.dcc025.hospital.usuarios.medico.Medico;
 import ufjf.dcc025.hospital.usuarios.paciente.Paciente;
-
-
+/**
+ *representa uma cosulta medica no hospital
+ * @author mjjun
+ */
 public class Consulta {
-    
-    private String dia;
-    private String horario;
-    private String duracao;
-    private Medico medicoResponsavel;
+    private Medico medico;
     private Paciente paciente;
-    
+    private LocalDateTime dataHora;
+    private boolean realizada;
+
     private boolean compareceu;
-    //private boolean marcada;
-    
-    public Consulta(String dia , String horario, String duracao, Medico medico, Paciente paciente){
-         
-        this.dia = dia;
-        this.horario = horario;
-        this.duracao = duracao;
+    //private boolean cancelada;
+
+    public Consulta(Medico medico, Paciente paciente, LocalDateTime dataHora){
+        this.medico = medico;
         this.paciente = paciente;
-        medicoResponsavel = medico;
-        //marcada = true;
-        this.compareceu = true; //vou considerar por padrão que o paciente foi
+        this.dataHora = dataHora;
+        this.realizada = false;
     }
-    
-    public String getDia(){ return dia; }
-    
-    public void alterarDia(String novoDia){
-        dia = novoDia;
+
+    public Medico getMedico(){
+        return medico;
     }
-    
-    public String getHorario(){ return horario; }
-    
-    public void alterarHorario(String novoHorario){
-        horario = novoHorario;
+
+    public Paciente getPaciente(){
+        return paciente;
     }
-    
-    public String getDuracao(){ return duracao; }
-    
-    public void alterarDuracao(String novaDuracao){
-        duracao = novaDuracao;
+
+    public LocalDateTime getDataHora(){
+        return dataHora;
     }
-    
-    public Medico getMedicoResponsavel() { return medicoResponsavel; }
-    
-    public Paciente getPaciente(){ return paciente; }
-    
-    /*
-    public void desmarcar(){
-        marcada = false;
+
+    public boolean isRealizada(){
+        return realizada;
     }
-    */
-    
+
+    public void marcarConcluida(){
+        this.realizada = true;
+    }
+
+    public void reagendar(LocalDate novaData, LocalTime novaHora){
+        this.dataHora = LocalDateTime.of(novaData, novaHora);
+    }
 
     public boolean isCompareceu(){
         return compareceu;

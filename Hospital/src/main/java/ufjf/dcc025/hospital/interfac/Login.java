@@ -5,7 +5,6 @@ package ufjf.dcc025.hospital.interfac;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-
 /**
  *
  * @author mjjun
