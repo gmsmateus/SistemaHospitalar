@@ -180,4 +180,10 @@ public class Hospital {
         consulta.reagendar(novaData, novaHora);
     }
 
+    public List<Consulta> listarConsultasDoDia(LocalDate data){
+        return consultas.stream()
+                .filter(c -> c.getDataHora().toLocalDate().equals(data))
+                .toList();
+    }
+
 }
