@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import ufjf.dcc025.hospital.usuarios.Usuario;
+import ufjf.dcc025.hospital.usuarios.médico.Agenda;
 import ufjf.dcc025.hospital.usuarios.médico.Medico;
 import ufjf.dcc025.hospital.usuarios.paciente.Paciente;
 import ufjf.dcc025.hospital.exception.UsuarioNaoEncontradoException;
@@ -126,8 +127,26 @@ public class Hospital {
             throw new DadosInvalidosException("Médico não possui agenda definida");
         }
         LocalDateTime horario = LocalDateTime.of(data, hora);
+        validarHorarioConsulta(medico, data, hora);
         Consulta consulta = new Consulta(medico, paciente, horario);
         consultas.add(consulta);
+    }
+
+    private void validarHorarioConsulta(Medico medico, LocalDate data, LocalTime hora){
+        Agenda agenda = medico.getAgenda();
+        //primeiro vou verificar o dia da semana
+        if(!agenda.getDia().equals(data.getDayOfWeek())){
+            throw new DadosInvalidosException("Médico não atende neste dia");
+        }
+        //agora vou verificar o intervalo do horario
+        if(hora.isBefore(agenda.getHoraInicio())|| hora.isAfter(agenda.getHoraFim())){
+            throw new DadosInvalidosException("Horário fora do período de atendimento");
+        }
+        //verifica o encaixe da duração agora
+        long minutosDesdeInicio = java.time.Duration.between(agenda.getHoraInicio(), hora).toMinutes();
+        if(minutosDesdeInicio % agenda.getDuracaoConsultas()!=0){
+            throw new DadosInvalidosException("Horário não compativel com a duração da consulta");
+        }
     }
 
 
