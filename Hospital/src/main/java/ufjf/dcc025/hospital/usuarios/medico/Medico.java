@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ufjf.dcc025.hospital.usuarios.médico;
+package ufjf.dcc025.hospital.usuarios.medico;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,7 @@ import ufjf.dcc025.hospital.usuarios.Usuario;
 public class Medico extends Usuario{
     private String especialidade;
     private boolean ativo;
+    private Agenda agenda1;
 
     //cada medico vai ter uma agenda de consultas que começa vazia
     private List<Consulta> agenda;
@@ -41,8 +42,8 @@ public class Medico extends Usuario{
     * @param senha senha do medico
     * @param especialidade especialidade medica
     */
-    public Medico(String nome, String email, String senha, String especialidade) throws DadosInvalidosException{
-        super(nome ,email, senha);
+    public Medico(String nome , String cpf, String login, String senha, String especialidade) throws DadosInvalidosException{
+        super(nome, cpf, login, senha);
         if(especialidade == null || especialidade.isBlank()){
             throw new IllegalArgumentException("A especialidade do medico não pode ser vazia");
         }
@@ -51,6 +52,14 @@ public class Medico extends Usuario{
         this.agenda = new ArrayList<>();
         this.historicos = new ArrayList<>();
         this.horariosAtendimento = new ArrayList<>();
+    }
+
+    public void definirAgenda(Agenda agenda){
+        this.agenda1 = agenda;
+    }
+
+    public Agenda getAgenda1(){
+        return agenda1;
     }
 
     /**

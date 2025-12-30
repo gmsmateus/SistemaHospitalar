@@ -1,7 +1,7 @@
 package ufjf.dcc025.hospital.servicos_hospital;
 
-import ufjf.dcc025.hospital.usuarios.médico.Medico;
 import ufjf.dcc025.hospital.usuarios.paciente.Paciente;
+import ufjf.dcc025.hospital.usuarios.medico.Medico;
 
 public class Atestado {
     

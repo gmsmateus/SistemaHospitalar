@@ -8,6 +8,9 @@ package ufjf.dcc025.hospital.exception;
  *
  * @author mjjun
  */
-public class UsuarioNaoEncontradoException {
-    
+public class UsuarioNaoEncontradoException extends RuntimeException {
+
+    public UsuarioNaoEncontradoException(String mensagem) {
+        super(mensagem);
+    }
 }
