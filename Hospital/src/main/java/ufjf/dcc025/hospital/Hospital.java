@@ -128,6 +128,7 @@ public class Hospital {
         }
         LocalDateTime horario = LocalDateTime.of(data, hora);
         validarHorarioConsulta(medico, data, hora);
+        validarConflitoHorario(medico, data, hora);
         Consulta consulta = new Consulta(medico, paciente, horario);
         consultas.add(consulta);
     }
@@ -149,5 +150,16 @@ public class Hospital {
         }
     }
 
+    private void validarConflitoHorario(Medico medico, LocalDate data, LocalTime hora){
+        boolean conflito = consultas.stream()
+                .anyMatch(c->
+                    c.getMedico().equals(medico) && 
+                    c.getDataHora().toLocalDate().equals(data) &&
+                    c.getDataHora().toLocalDate().equals(hora)
+                );
+        if(conflito){
+            throw new DadosInvalidosException("Médico ja possui consulta marcada nesse horario");
+        }
+    }
 
 }
