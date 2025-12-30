@@ -21,7 +21,6 @@ public class Consulta {
         this.paciente = paciente;
         this.dataHora = dataHora;
         this.realizada = false;
-        //this.cancelada = false;
     }
 
     public Medico getMedico(){
@@ -43,10 +42,6 @@ public class Consulta {
     public void marcarConcluida(){
         this.realizada = true;
     }
-
-    //public void cancelarConsulta(){
-    //    this.cancelada = true;
-    //}
 
     public void reagendar(LocalDate novaData, LocalTime novaHora){
         this.dataHora = LocalDateTime.of(novaData, novaHora);

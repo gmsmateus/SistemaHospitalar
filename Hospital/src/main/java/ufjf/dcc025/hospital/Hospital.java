@@ -97,12 +97,14 @@ public class Hospital {
     public List<Consulta> listarConsultasPorMedico(Medico medico){
         return consultas.stream()
                 .filter(c -> c.getMedico().equals(medico))
+                .filter(c -> !c.isRealizada())
                 .toList();
     }
     //lista de consultas de um paciente
     public List<Consulta> listarConsultasPorPaciente(Paciente paciente){
         return consultas.stream()
                 .filter(c -> c.getPaciente().equals(paciente))
+                .filter(c -> !c.isRealizada())
                 .toList();
     }
 
@@ -184,6 +186,16 @@ public class Hospital {
         return consultas.stream()
                 .filter(c -> c.getDataHora().toLocalDate().equals(data))
                 .toList();
+    }
+
+    public void finalizarConsulta(Consulta consulta){
+        if(!consultas.contains(consulta)){
+            throw new UsuarioNaoEncontradoException("Consulta não encontrada");
+        }
+        if(consulta.isRealizada()){
+            throw new DadosInvalidosException("Consulta já foi realizada");
+        }
+        consulta.marcarConcluida();
     }
 
 }
